@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup />
+  <ItemGroup>
+    <Page Update="CommonResources.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Resources\Brushes.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Resources\CheckBoxStyle.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Resources\ComboBoxStyle.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Resources\Converters.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Resources\ErrorTemplates.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Resources\WindowStyle.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Resources\WindowStyleMaterialDesign.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\Generic.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\DialogBox.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\Equalizer.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\MediaPlayer.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\NumericUpDown.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\SlideButton.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\XSlider.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+</Project>

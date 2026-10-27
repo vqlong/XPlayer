@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfMediaPlayerSetting>
+  <MediaPlayerSetting>
+    <Name>BackgroundView</Name>
+    <Value>TurquoiseGradient</Value>
+  </MediaPlayerSetting>
+  <MediaPlayerSetting>
+    <Name>BorderColorView</Name>
+    <Value>PurpleGradient</Value>
+  </MediaPlayerSetting>
+</ArrayOfMediaPlayerSetting>

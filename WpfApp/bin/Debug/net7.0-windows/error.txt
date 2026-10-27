@@ -1,0 +1,18 @@
+Must specify URI.
+
+PresentationCore
+   at System.Windows.Media.MediaTimeline.AllocateClock()
+   at System.Windows.Media.Animation.Clock.AllocateClock(Timeline timeline, Boolean hasControllableRoot)
+   at System.Windows.Media.Animation.ClockGroup.BuildClockSubTreeFromTimeline(Timeline timeline, Boolean hasControllableRoot)
+   at System.Windows.Media.Animation.Clock.BuildClockTreeFromTimeline(Timeline rootTimeline, Boolean hasControllableRoot)
+   at System.Windows.Media.Animation.Storyboard.BeginCommon(DependencyObject containingObject, INameScope nameScope, HandoffBehavior handoffBehavior, Boolean isControllable, Int64 layer)
+   at System.Windows.Media.Animation.BeginStoryboard.Begin(DependencyObject targetObject, INameScope nameScope, Int64 layer)
+   at System.Windows.EventTrigger.EventTriggerSourceListener.Handler(Object sender, RoutedEventArgs e)
+   at System.Windows.EventRoute.InvokeHandlersImpl(Object source, RoutedEventArgs args, Boolean reRaised)
+   at System.Windows.UIElement.RaiseEventImpl(DependencyObject sender, RoutedEventArgs args)
+   at XLib.UserControls.MediaPlayer.MenuItem_ControlMedia(Object sender, RoutedEventArgs e) in J:\Programing\C#\VisualStudio2022\4.App\XPlayer\XLib\UserControls\MediaPlayer.xaml.cs:line 484
+   at System.Windows.EventRoute.InvokeHandlersImpl(Object source, RoutedEventArgs args, Boolean reRaised)
+   at System.Windows.UIElement.RaiseEventImpl(DependencyObject sender, RoutedEventArgs args)
+   at System.Windows.Controls.MenuItem.InvokeClickAfterRender(Object arg)
+   at System.Windows.Threading.ExceptionWrapper.InternalRealCall(Delegate callback, Object args, Int32 numArgs)
+   at System.Windows.Threading.ExceptionWrapper.TryCatchWhen(Object source, Delegate callback, Object args, Int32 numArgs, Delegate catchHandler)
