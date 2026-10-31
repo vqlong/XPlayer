@@ -13,8 +13,8 @@ TRACE;DEBUG;NET;NET7_0;NETCOREAPP;WINDOWS;WINDOWS7_0;NET5_0_OR_GREATER;NET6_0_OR
 161670250157
 
 43478810998
-201-2143344006
+2011650149171
 CommonResources.xaml;Resources\Brushes.xaml;Resources\CheckBoxStyle.xaml;Resources\ComboBoxStyle.xaml;Resources\Converters.xaml;Resources\ErrorTemplates.xaml;Resources\Fonts.xaml;Resources\WindowStyle.xaml;Resources\WindowStyleMaterialDesign.xaml;Themes\Generic.xaml;UserControls\DialogBox.xaml;UserControls\Equalizer.xaml;UserControls\MediaPlayer.xaml;UserControls\NumericUpDown.xaml;UserControls\SlideButton.xaml;UserControls\XSlider.xaml;
 
-True
+False
 

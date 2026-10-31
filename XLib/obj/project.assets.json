@@ -151,7 +151,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\HolyShit\\.nuget\\packages\\": {},
+    "D:\\MyCache\\NuGet\\packages": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
@@ -160,7 +160,7 @@
       "projectUniqueName": "J:\\Programing\\C#\\VisualStudio2022\\4.App\\XPlayer\\XLib\\XLib.csproj",
       "projectName": "XLib",
       "projectPath": "J:\\Programing\\C#\\VisualStudio2022\\4.App\\XPlayer\\XLib\\XLib.csproj",
-      "packagesPath": "C:\\Users\\HolyShit\\.nuget\\packages\\",
+      "packagesPath": "D:\\MyCache\\NuGet\\packages",
       "outputPath": "J:\\Programing\\C#\\VisualStudio2022\\4.App\\XPlayer\\XLib\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [

@@ -53,7 +53,7 @@ namespace XLib.Resources {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/XLib;component/resources/windowstyle.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/XLib;V1.0.0.0;component/resources/windowstyle.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Resources\WindowStyle.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

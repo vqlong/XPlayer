@@ -172,7 +172,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\HolyShit\\.nuget\\packages\\": {},
+    "D:\\MyCache\\NuGet\\packages": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
@@ -181,7 +181,7 @@
       "projectUniqueName": "J:\\Programing\\C#\\VisualStudio2022\\4.App\\XPlayer\\WpfApp\\WpfApp.csproj",
       "projectName": "XPlayer",
       "projectPath": "J:\\Programing\\C#\\VisualStudio2022\\4.App\\XPlayer\\WpfApp\\WpfApp.csproj",
-      "packagesPath": "C:\\Users\\HolyShit\\.nuget\\packages\\",
+      "packagesPath": "D:\\MyCache\\NuGet\\packages",
       "outputPath": "J:\\Programing\\C#\\VisualStudio2022\\4.App\\XPlayer\\WpfApp\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
