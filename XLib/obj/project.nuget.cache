@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "eQnVhvAAdyQ=",
+  "dgSpecHash": "1elR8dA2p1s=",
   "success": true,
-  "projectFilePath": "J:\\Programing\\C#\\VisualStudio2022\\4.App\\XPlayer\\XLib\\XLib.csproj",
+  "projectFilePath": "J:\\2.Programing\\C#\\4.App\\XPlayer\\XLib\\XLib.csproj",
   "expectedPackageFiles": [
     "D:\\MyCache\\NuGet\\packages\\materialdesigncolors\\2.1.4\\materialdesigncolors.2.1.4.nupkg.sha512",
     "D:\\MyCache\\NuGet\\packages\\materialdesignthemes\\4.9.0\\materialdesignthemes.4.9.0.nupkg.sha512",

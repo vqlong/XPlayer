@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace XLib.UserControls
 {
-    public class MediaPlayerSetting : Xmlable
+    public enum XPlayerStatus
     {
-        public string Name { get; set; } = "";
-        public string Value { get; set; } = "";
+        Stop = 0, Play = 1, Pause = 2, Resume = 3, End = 4
     }
 }

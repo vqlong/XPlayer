@@ -55,7 +55,7 @@ namespace XLib.UserControls {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/XLib;V1.0.0.0;component/usercontrols/numericupdown.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/XLib;component/usercontrols/numericupdown.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\UserControls\NumericUpDown.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

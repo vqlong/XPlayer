@@ -31,7 +31,7 @@ namespace XLib.UserControls
 
         Storyboard _storyboard;
         public static readonly DependencyProperty StatusProperty =
-                DependencyProperty.Register("Status", typeof(MediaPlayerStatus), typeof(Equalizer), new PropertyMetadata(MediaPlayerStatus.Stop, StatusChangedCallback));
+                DependencyProperty.Register("Status", typeof(XPlayerStatus), typeof(Equalizer), new PropertyMetadata(XPlayerStatus.Stop, StatusChangedCallback));
         public static readonly DependencyProperty ModeProperty =
             DependencyProperty.Register("Mode", typeof(int), typeof(Equalizer), new PropertyMetadata(4, ModeChangedCallback));
         public static readonly DependencyProperty ShowModeProperty =
@@ -40,7 +40,7 @@ namespace XLib.UserControls
             DependencyProperty.Register("EqualizerWidth", typeof(double), typeof(Equalizer), new PropertyMetadata(200.0));
         public static readonly DependencyProperty EqualizerHeightProperty =
             DependencyProperty.Register("EqualizerHeight", typeof(double), typeof(Equalizer), new PropertyMetadata(100.0));
-        public MediaPlayerStatus Status { get => (MediaPlayerStatus)GetValue(StatusProperty); set => SetValue(StatusProperty, value); }
+        public XPlayerStatus Status { get => (XPlayerStatus)GetValue(StatusProperty); set => SetValue(StatusProperty, value); }
         public int Mode { get => (int)GetValue(ModeProperty); set => SetValue(ModeProperty, value); }
         public bool ShowMode { get => (bool)GetValue(ShowModeProperty); set => SetValue(ShowModeProperty, value); }
         public double EqualizerWidth { get => (double)GetValue(EqualizerWidthProperty); set => SetValue(EqualizerWidthProperty, value); }
@@ -49,12 +49,12 @@ namespace XLib.UserControls
         private static void StatusChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var equalizer = (Equalizer)d;
-            var status = (MediaPlayerStatus)e.NewValue;
-            if (status == MediaPlayerStatus.Play) equalizer._storyboard.Begin();
-            if (status == MediaPlayerStatus.Pause) equalizer._storyboard.Pause();
-            if (status == MediaPlayerStatus.Resume) equalizer._storyboard.Resume();
-            if (status == MediaPlayerStatus.Stop) equalizer._storyboard.Stop();
-            if (status == MediaPlayerStatus.End) equalizer._storyboard.Stop();
+            var status = (XPlayerStatus)e.NewValue;
+            if (status == XPlayerStatus.Play) equalizer._storyboard.Begin();
+            if (status == XPlayerStatus.Pause) equalizer._storyboard.Pause();
+            if (status == XPlayerStatus.Resume) equalizer._storyboard.Resume();
+            if (status == XPlayerStatus.Stop) equalizer._storyboard.Stop();
+            if (status == XPlayerStatus.End) equalizer._storyboard.Stop();
             // DialogBox.ShowInfo($"Name: {equalizer.Name}\nStatus: {equalizer.Status}\nNewValue: {status}");
         }       
         private static void ModeChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -88,15 +88,15 @@ namespace XLib.UserControls
                 equalizer._storyboard = (Storyboard)equalizer.TryFindResource("Storyboard.Equalizer4");
             }
             
-            if (equalizer.Status == MediaPlayerStatus.Play || equalizer.Status == MediaPlayerStatus.Resume) equalizer._storyboard.Begin();
+            if (equalizer.Status == XPlayerStatus.Play || equalizer.Status == XPlayerStatus.Resume) equalizer._storyboard.Begin();
         }       
         private void UserControl_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if(Status == MediaPlayerStatus.Play || Status == MediaPlayerStatus.Resume || Status == MediaPlayerStatus.Pause)
+            if(Status == XPlayerStatus.Play || Status == XPlayerStatus.Resume || Status == XPlayerStatus.Pause)
             {
                 var currentStatus = Status;
-                SetCurrentValue(StatusProperty, MediaPlayerStatus.Stop);
-                SetCurrentValue(StatusProperty, MediaPlayerStatus.Play);
+                SetCurrentValue(StatusProperty, XPlayerStatus.Stop);
+                SetCurrentValue(StatusProperty, XPlayerStatus.Play);
                 SetCurrentValue(StatusProperty, currentStatus);
             }
         }

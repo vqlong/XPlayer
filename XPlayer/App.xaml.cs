@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using XLib;
 using XLib.UserControls;
 
-namespace WpfApp
+namespace XPlayer
 {
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
     public partial class App : Application
     {
-		MediaPlayer? player;
+        XLib.UserControls.XPlayer? player;
         static bool createdNew;
         Mutex mutex = new Mutex(true, "mutexofxplayer", out createdNew);
         const string pipeName = "pipeofxplayer";

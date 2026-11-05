@@ -4,17 +4,17 @@
 library
 C#
 .cs
-J:\Programing\C#\VisualStudio2022\4.App\XPlayer\XLib\obj\Debug\net7.0-windows\
+J:\2.Programing\C#\4.App\XPlayer\XLib\obj\Debug\net7.0-windows\
 XLib
 none
 false
 TRACE;DEBUG;NET;NET7_0;NETCOREAPP
 
-161670250157
+16327769856
 
-41104224965
-201-2143344006
-CommonResources.xaml;Resources\Brushes.xaml;Resources\CheckBoxStyle.xaml;Resources\ComboBoxStyle.xaml;Resources\Converters.xaml;Resources\ErrorTemplates.xaml;Resources\Fonts.xaml;Resources\WindowStyle.xaml;Resources\WindowStyleMaterialDesign.xaml;Themes\Generic.xaml;UserControls\DialogBox.xaml;UserControls\Equalizer.xaml;UserControls\MediaPlayer.xaml;UserControls\NumericUpDown.xaml;UserControls\SlideButton.xaml;UserControls\XSlider.xaml;
+41-318062190
+2011650149171
+CommonResources.xaml;Resources\Brushes.xaml;Resources\CheckBoxStyle.xaml;Resources\ComboBoxStyle.xaml;Resources\Converters.xaml;Resources\ErrorTemplates.xaml;Resources\Fonts.xaml;Resources\WindowStyle.xaml;Resources\WindowStyleMaterialDesign.xaml;Themes\Generic.xaml;UserControls\DialogBox.xaml;UserControls\Equalizer.xaml;UserControls\NumericUpDown.xaml;UserControls\SlideButton.xaml;UserControls\XPlayer.xaml;UserControls\XSlider.xaml;
 
 False
 

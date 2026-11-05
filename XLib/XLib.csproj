@@ -14,7 +14,7 @@
     <Compile Update="UserControls\Equalizer.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\MediaPlayer.xaml.cs">
+    <Compile Update="UserControls\XPlayer.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\NumericUpDown.xaml.cs">

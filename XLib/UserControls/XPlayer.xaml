@@ -1,4 +1,4 @@
-﻿<Window x:Class="XLib.UserControls.MediaPlayer"
+﻿<Window x:Class="XLib.UserControls.XPlayer"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -27,6 +27,8 @@
                 <ResourceDictionary Source="pack://application:,,,/XLib;component/Resources/Converters.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/XLib;component/Resources/Brushes.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+
+            <Binding x:Key="Player.HasItems" Path="DataContext" Source="{x:Reference player}"/>
 
             <CollectionViewSource x:Key="FileNamesView" Source="{Binding FileNames}"/>
 
@@ -326,8 +328,8 @@
                                     </GridView>
                                 </ListView.View>
                                 <ListView.ContextMenu>
-                                    <ContextMenu>
-                                        <MenuItem Header="Play" Click="MenuItem_Play" IsEnabled="{Binding Path=HasItems}">
+                                    <ContextMenu DataContext="{Binding RelativeSource={RelativeSource Self}, Path=PlacementTarget.DataContext}">
+                                        <MenuItem Header="Play" Click="MenuItem_Play" IsEnabled="{Binding HasItems}">
                                             <MenuItem.Icon>
                                                 <Border>
                                                     <Border.Background>
@@ -521,7 +523,7 @@
         </Border>
     </DockPanel>
     <Window.ContextMenu>
-        <ContextMenu >
+        <ContextMenu DataContext="{Binding RelativeSource={RelativeSource Self}, Path=PlacementTarget.DataContext}">
             <MenuItem Header="Next Equalizer" IsEnabled="{Binding Source={x:Reference menuEqualizer}, Path=IsChecked}" Click="MenuItem_NextEqualizer" >
                 <MenuItem.Icon>
                     <Canvas>
@@ -568,7 +570,7 @@
             </MenuItem>
             <MenuItem x:Name="menuEqualizer" Header="Equalizer" IsCheckable="True" IsChecked="True"/>
             <Separator/>
-            <MenuItem Header="Play" Click="MenuItem_ControlMedia" IsEnabled="{Binding Path=HasItems}">
+            <MenuItem Header="Play" Click="MenuItem_ControlMedia" IsEnabled="{Binding HasItems}">
                 <MenuItem.Icon>
                     <Border >
                         <Border.Background>

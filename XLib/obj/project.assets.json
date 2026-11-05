@@ -157,11 +157,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "J:\\Programing\\C#\\VisualStudio2022\\4.App\\XPlayer\\XLib\\XLib.csproj",
+      "projectUniqueName": "J:\\2.Programing\\C#\\4.App\\XPlayer\\XLib\\XLib.csproj",
       "projectName": "XLib",
-      "projectPath": "J:\\Programing\\C#\\VisualStudio2022\\4.App\\XPlayer\\XLib\\XLib.csproj",
+      "projectPath": "J:\\2.Programing\\C#\\4.App\\XPlayer\\XLib\\XLib.csproj",
       "packagesPath": "D:\\MyCache\\NuGet\\packages",
-      "outputPath": "J:\\Programing\\C#\\VisualStudio2022\\4.App\\XPlayer\\XLib\\obj\\",
+      "outputPath": "J:\\2.Programing\\C#\\4.App\\XPlayer\\XLib\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

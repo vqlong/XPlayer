@@ -35,7 +35,7 @@
     <Page Update="UserControls\Equalizer.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="UserControls\MediaPlayer.xaml">
+    <Page Update="UserControls\XPlayer.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UserControls\NumericUpDown.xaml">

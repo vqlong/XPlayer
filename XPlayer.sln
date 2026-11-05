@@ -5,7 +5,7 @@ VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XLib", "XLib\XLib.csproj", "{0A92EFAE-4CA2-45E6-9D68-75160F9F2D3C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfApp", "WpfApp\WpfApp.csproj", "{E1ECD3A1-EA4F-4863-A3CD-D5171ECEE78D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XPlayer", "XPlayer\XPlayer.csproj", "{E1ECD3A1-EA4F-4863-A3CD-D5171ECEE78D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

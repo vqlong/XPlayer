@@ -25,11 +25,11 @@ using System.Xml.Serialization;
 namespace XLib.UserControls
 {
     /// <summary>
-    /// Interaction logic for MediaPlayer.xaml
+    /// Interaction logic for XPlayer.xaml
     /// </summary>
-    public partial class MediaPlayer : Window, INotifyPropertyChanged
+    public partial class XPlayer : Window, INotifyPropertyChanged
     {
-        public MediaPlayer()
+        public XPlayer()
         {
             InitializeComponent();
 
@@ -55,33 +55,36 @@ namespace XLib.UserControls
 
             //bổ sung thêm file .gif từ thư mục ngoài
             Directory.CreateDirectory(EqualizerPath);
-            GifFiles.AddRange(Directory.GetFiles(EqualizerPath, "*.gif"));
-
-            OpenPlaylist(PlaylistPath + LastPlaylistName);
-            PlaylistName = LastPlaylistName;
+            GifFiles.AddRange(Directory.GetFiles(EqualizerPath, "*.gif"));            
 
             LoadColorSetting();
 
             FileNames.CollectionChanged += (s, e) =>
             {
-                if (lsvFileNames.HasItems) HasItems = true;
+                if (lsvFileNames.HasItems)
+                {
+                    HasItems = true;
+                    if (lsvFileNames.SelectedIndex <= 0) lsvFileNames.SelectedIndex = 0;
+                }
                 else HasItems = false;
             };
+
+            OpenPlaylist(PlaylistPath + LastPlaylistName);
         }
         //Storyboard điều khiển animation cho equalizer của window table manager
         private ClockController? titleClockController;
         private ClockController? title1ClockController;
+        private XPlayerStatus _status;
+        private ClockState _clockState;
         private string _textPosition = "00:00:00";
         private string _playlistName = "New Playlist";
-        private MediaPlayerStatus _status;
-        private ClockState _clockState;
         private bool _isRepeat = false;
         private bool _isShuffle = false;
-        private bool _hasItems = true;
+        private bool _hasItems = false;
+        public XPlayerStatus Status { get => _status; set => OnPropertyChanged(ref _status, value); }
+        public ClockState ClockState { get => _clockState; set => OnPropertyChanged(ref _clockState, value); }
         public string TextPosition { get => _textPosition; set => OnPropertyChanged(ref _textPosition, value); }
         public string PlaylistName { get => _playlistName; set => OnPropertyChanged(ref _playlistName, value); }
-        public MediaPlayerStatus Status { get => _status; set => OnPropertyChanged(ref _status, value); }
-        public ClockState ClockState { get => _clockState; set => OnPropertyChanged(ref _clockState, value); }
         public bool IsRepeat { get => _isRepeat; set => OnPropertyChanged(ref _isRepeat, value); }
         public bool IsShuffle { get => _isShuffle; set => OnPropertyChanged(ref _isShuffle, value); }
         public bool HasItems { get => _hasItems; set => OnPropertyChanged(ref _hasItems, value); }
@@ -94,6 +97,7 @@ namespace XLib.UserControls
         public string PlaylistPath { get; } = AppContext.BaseDirectory + @"Player\Playlists\";
         public string SettingPath { get; } = AppContext.BaseDirectory + @"Player\Setting\";
         public string EqualizerPath { get; } = AppContext.BaseDirectory + @"Player\Equalizer\";
+        public string PlayingItem { get; private set; }
         public string[] AudioFormats { get; } = new[] { ".mp3", ".m4a", ".wav", ".wma", ".flac", ".webm" };
         public string[] VideoFormats { get; } = new[] { ".mp4", ".flv", ".avi", ".wmv", ".webm" };
         public ObservableCollection<string> FileNames { get; } = new ObservableCollection<string>();
@@ -110,7 +114,7 @@ namespace XLib.UserControls
 
         private void LoadColorSetting()
         {
-            var settings = OpenFile<MediaPlayerSetting[]>(SettingPath + SettingFileName);
+            var settings = OpenFile<XPlayerSetting[]>(SettingPath + SettingFileName);
             if (settings != null && settings.Length > 0)
             {
                 foreach(var setting in settings)
@@ -200,7 +204,7 @@ namespace XLib.UserControls
                 else
                 {
                     Stop();
-                    Status = MediaPlayerStatus.End;
+                    Status = XPlayerStatus.End;
                     //Nếu không repeat thì next sang bài tiếp (nếu repeat thì play liên tục 1 bài)
                     Next();
                 }
@@ -209,7 +213,7 @@ namespace XLib.UserControls
         private void sliderSeekBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             // khi stop sẽ không cho tua đi tua lại nữa
-            if (Status == MediaPlayerStatus.Stop || Status == MediaPlayerStatus.End)
+            if (Status == XPlayerStatus.Stop || Status == XPlayerStatus.End)
             {
                 e.Handled = false;
                 return;
@@ -256,7 +260,7 @@ namespace XLib.UserControls
                 Seek(currentPosition);
             }
 
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("IsRepeat"));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsRepeat)));
         }
         private void InitializeTitleAnimation()
         {
@@ -331,13 +335,15 @@ namespace XLib.UserControls
             {
                 if (button.Name == "btnPlay")
                 {
+                    PlayingItem = (string)lsvFileNames.SelectedItem;
+
                     ShowPauseButton();
 
                     sliderSeekBar.IsEnabled = true;
 
                     UpdateLayout();
 
-                    Status = MediaPlayerStatus.Play;
+                    Status = XPlayerStatus.Play;
 
                     gifPlayer.Play();
 
@@ -349,19 +355,19 @@ namespace XLib.UserControls
                     HideTitle();
                     canvasTitle.Visibility = Visibility.Visible;
 
-                    MenuItem_NextEqualizer(sender, e);
+                    NextEqualizer();
                 }
                 else if (button.Name == "btnPause")
                 {
-                    if (Status == MediaPlayerStatus.Pause || Status == MediaPlayerStatus.Stop)
+                    if (Status == XPlayerStatus.Pause || Status == XPlayerStatus.Stop)
                     {
                         return;
                     }
-                    else if (Status == MediaPlayerStatus.Play || Status == MediaPlayerStatus.Resume)
+                    else if (Status == XPlayerStatus.Play || Status == XPlayerStatus.Resume)
                     {
                         ShowResumeButton();
 
-                        Status = MediaPlayerStatus.Pause;
+                        Status = XPlayerStatus.Pause;
                         gifPlayer.Pause();
                         StoryboardEqualizer?.Pause();
                         StopAnimateTitle();
@@ -371,11 +377,11 @@ namespace XLib.UserControls
                 else if (button.Name == "btnResume")
                 {
 
-                    if (Status == MediaPlayerStatus.Pause)
+                    if (Status == XPlayerStatus.Pause)
                     {
                         ShowPauseButton();
 
-                        Status = MediaPlayerStatus.Resume;
+                        Status = XPlayerStatus.Resume;
                         gifPlayer.Play();
                         StoryboardEqualizer?.Resume();
                         BeginAnimateTitle();
@@ -384,13 +390,13 @@ namespace XLib.UserControls
                 }
                 else if (button.Name == "btnStop")
                 {
-                    if (Status != MediaPlayerStatus.Stop)
+                    if (Status != XPlayerStatus.Stop)
                     {
                         ShowPlayButton();
 
                         sliderSeekBar.IsEnabled = false;
 
-                        Status = MediaPlayerStatus.Stop;
+                        Status = XPlayerStatus.Stop;
                         gifPlayer.Stop();
                         StoryboardEqualizer?.Stop();
                         StopAnimateTitle();
@@ -406,6 +412,11 @@ namespace XLib.UserControls
         private bool isPlayingGif;
         private int equalizerIndex = 0;
         private void MenuItem_NextEqualizer(object sender, RoutedEventArgs e)
+        {
+            NextEqualizer();
+        }
+
+        public void NextEqualizer()
         {
             if (media.HasVideo) return;
 
@@ -488,16 +499,11 @@ namespace XLib.UserControls
         {
             if (sender is MenuItem item)
             {
-                if (item.Header.ToString() == "Play")
-                    btnPlay.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent, btnPlay));
-                if (item.Header.ToString() == "Pause")
-                    btnPause.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent, btnPause));
-                if (item.Header.ToString() == "Resume")
-                    btnResume.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent, btnResume));
-                if (item.Header.ToString() == "Stop")
-                    btnStop.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent, btnStop));
-                if (item.Header.ToString() == "Next")
-                    btnNext.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent, btnNext));
+                if (item.Header.ToString() == "Play") Play();
+                if (item.Header.ToString() == "Pause") Pause();
+                if (item.Header.ToString() == "Resume") Resume();
+                if (item.Header.ToString() == "Stop") Stop();
+                if (item.Header.ToString() == "Next") Next();
             }
         }
         private void svFileNames_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
@@ -542,9 +548,18 @@ namespace XLib.UserControls
         }
         private void MenuItem_RemoveFromPlaylist(object sender, RoutedEventArgs e)
         {
-            if (FileNames.Count > 0 && lsvFileNames.SelectedItem != null) FileNames.Remove((string)lsvFileNames.SelectedItem);
-            var view = CollectionViewSource.GetDefaultView(lsvFileNames.ItemsSource);
-            view.Refresh();
+            if (FileNames.Count > 0 && lsvFileNames.SelectedItem != null)
+            {
+                var selectedItem = (string)lsvFileNames.SelectedItem;
+                FileNames.Remove(selectedItem);
+                if (PlayingItem == selectedItem)
+                {
+                    Stop();
+                    return;
+                }
+                var view = CollectionViewSource.GetDefaultView(lsvFileNames.ItemsSource);
+                view.Refresh();
+            }
         }
         private void Window_Closing(object sender, CancelEventArgs e)
         {
@@ -559,8 +574,8 @@ namespace XLib.UserControls
                 Directory.CreateDirectory(SettingPath);
                 var settings = new[]
                 {
-                    new MediaPlayerSetting(){ Name = nameof(BackgroundView), Value = BackgroundView.CurrentItem?.ToString() },
-                    new MediaPlayerSetting(){ Name = nameof(BorderColorView), Value = BorderColorView.CurrentItem?.ToString() }
+                    new XPlayerSetting(){ Name = nameof(BackgroundView), Value = BackgroundView.CurrentItem?.ToString() },
+                    new XPlayerSetting(){ Name = nameof(BorderColorView), Value = BorderColorView.CurrentItem?.ToString() }
                 };
 
                 settings.ToXmlFile(SettingPath + SettingFileName);
@@ -585,7 +600,7 @@ namespace XLib.UserControls
             {
                 lsvFileNames.SelectedIndex = 0;
 
-                btnPlay.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent, btnPlay));
+                Play();
             }
             else
             {
@@ -595,11 +610,22 @@ namespace XLib.UserControls
         }
         public void Play()
         {
+            if (FileNames.Count <= 0 || lsvFileNames.SelectedIndex < 0) return;
+
             btnPlay.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent, btnPlay));
         }
         public void Stop()
         {
             btnStop.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent, btnStop));
+
+        }
+        public void Pause()
+        {
+            btnPause.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent, btnPause));
+        }
+        public void Resume()
+        {
+            btnResume.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent, btnResume));
 
         }
         public bool AddToPlaylist(string[] fileNames, bool isOverwrite = true)
@@ -669,21 +695,22 @@ namespace XLib.UserControls
             if (openFileDialog.ShowDialog() == true)
             {
                 OpenPlaylist(openFileDialog.FileName);
-                PlaylistName = openFileDialog.SafeFileName;
             }
         }
-        private void OpenPlaylist(string playlistName)
+        private bool OpenPlaylist(string playlistName)
         {
             var playlist = OpenFile<List<string>>(playlistName);
             if (playlist != null)
             {
                 FileNames.Clear();
                 playlist.ForEach(f => FileNames.Add(f));
-                lsvFileNames.SelectedIndex = 0;
+                //lsvFileNames.SelectedIndex = 0;
+                PlaylistName = System.IO.Path.GetFileName(playlistName);
+                return true;
             }
             else
             {
-                DialogBox.ShowError("Playlist Not Found.");
+                return false;
             }
         }
         private T? OpenFile<T>(string fileName)
@@ -697,7 +724,7 @@ namespace XLib.UserControls
             }
             else
             {
-                DialogBox.ShowError("File Not Found.");
+                //DialogBox.ShowError("File Not Found.");
                 return default;
             }
         }
@@ -747,12 +774,14 @@ namespace XLib.UserControls
             if (!string.IsNullOrEmpty(fileNames[0]))
             {
                 AddToPlaylist(fileNames);
-                lsvFileNames.SelectedIndex = 0;
+                //lsvFileNames.SelectedIndex = 0;
+                Play();
             }
         }
         private void MenuItem_Play(object sender, RoutedEventArgs e)
         {
             Play();
         }
+
     }
 }
